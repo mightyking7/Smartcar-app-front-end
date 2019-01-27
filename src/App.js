@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
+const API_KEY = "AIzaSyAblVcIeN2fyCK95R8Etxj1P8Kfm4bHWKU";
 
 class App extends Component
 {
   render()
   {
-    return (
+      return (
         <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
+            <Map google={this.props.google} zoom={14}>
+
+                <Marker onClick={this.onMarkerClick}
+                        name={'Current location'} />
+
+                <InfoWindow onClose={this.onInfoWindowClose}>
+                </InfoWindow>
+            </Map>
       </div>
     );
   }
 }
 
-export default App;
+
+
+export default GoogleApiWrapper({
+    apiKey: (API_KEY)
+})(App);
